@@ -1,7 +1,8 @@
 /*
-Calculator Assignment
+This is the app that uses calc library.
 */
-#include "calculator.hpp"
+
+#include <iostream>
 
 int main() {
   int choice;
