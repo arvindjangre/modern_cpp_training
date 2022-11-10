@@ -1,8 +1,8 @@
 /*
 This is the app that uses calc library.
 */
-
 #include <iostream>
+#include "calc.hpp"
 
 int main() {
   int choice;
