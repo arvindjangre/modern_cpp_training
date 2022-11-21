@@ -2,7 +2,8 @@
 
 void Matrix::fillValues() {
   int temp;
-
+  
+  std::cout << "Enter (" << rows << "*" << cols << ") elements: "; 
   for (int i = 0; i < rows; i++) {
     std::vector<int> r;
     for (int j = 0; j < cols; j++) {
@@ -31,7 +32,7 @@ Matrix Matrix::operator+(Matrix &m2) {
 
 Matrix Matrix::operator*(Matrix &m2) {
   if (cols != m2.rows) {
-    throw std::invalid_argument("Matrix dimensions do not match");
+    throw std::invalid_argument("Matrix dimensions do not match for multiplication.");
   }
   Matrix Result(rows, cols);
   Result.mat.resize(rows, std::vector<int>(cols));
