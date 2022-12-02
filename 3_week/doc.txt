@@ -1,0 +1,7 @@
+Parser
+
+Use external libraries to create your class to handle the XML, JSON and CSV file.
+
+Class should follow OOP's concept
+
+User can read the file and see the content on console
