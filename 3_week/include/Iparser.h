@@ -1,0 +1,5 @@
+class IParser {
+  private:
+  public:
+
+};
