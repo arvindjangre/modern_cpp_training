@@ -14,6 +14,10 @@ set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 file(GLOB_RECURSE SRC_FILES src/*.cpp )
 add_executable(parser ${SRC_FILES})
 
+add_subdirectory(csv-parser)
+
+target_link_libraries(parser csv)
+
 target_include_directories(parser PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 find_library(MY_PROTOCOL libprotocol.so)
 message(STATUS ${MY_PROTOCOL})
@@ -25,6 +29,7 @@ find_package(Boost 1.40.0 REQUIRED system)
 find_package(Boost COMPONENTS thread system REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIR})
+include_directories(${CSV_INCLUDE_DIR})
 
 set(LIBS mysqlclient Threads::Threads ${MY_PROTOCOL} ${Boost_LIBRARIES})
 target_link_libraries(${PROJECT_NAME} ${LIBS})
