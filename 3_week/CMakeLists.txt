@@ -14,12 +14,9 @@ file(GLOB_RECURSE SRC_FILES src/*.cpp )
 add_executable(parser ${SRC_FILES})
 
 add_subdirectory(csv-parser)
-add_subdirectory(json)
-add_subdirectory(cereal)
 
 set(JSON_BuildTests OFF CACHE INTERNAL "")
-target_link_libraries(parser csv cereal::cereal)
-target_link_libraries(parser nlohmann_json::nlohmann_json)
+target_link_libraries(parser csv)
 include_directories(${Boost_INCLUDE_DIR})
 
 target_include_directories(parser PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

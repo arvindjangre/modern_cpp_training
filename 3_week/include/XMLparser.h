@@ -10,4 +10,4 @@ class XMLparser : public IParser {
     XMLparser(std::string fileName) : m_filename{fileName} {}
     virtual std::ostream &print(std::ostream &out) const override;
 };
-#endif;
+#endif

@@ -5,14 +5,16 @@
 #include <string>
 #include <filesystem>
 #include <fstream>
-#include <nlohmann/json.hpp>
+#include <rapidjson/writer.h>
+#include <rapidjson/document.h>
+#include <rapidjson/stringbuffer.h>
 
 int getFileType(const std::string &);
 
 int main(int argc, char *argv[])
 {
 
-  int fileType = 2;
+  int fileType = 3;
   std::string fileName = argv[1];
 
   switch (fileType)
@@ -35,7 +37,35 @@ int main(int argc, char *argv[])
   break;
   case 3:
   {
+    using namespace rapidjson;
     // json parser
+    const char* json = R"(
+    {
+        "Book": {
+            "Width":  450,
+            "Height": 30,
+            "Title":  "Hello World",
+            "isBiography": false,
+            "NumOfCopies": 4,
+            "LibraryIDs": [2319, 1406, 3854, 987]
+        }
+    }
+    )";
+
+    // Parse the JSON string into DOM
+    Document mydoc;
+    mydoc.Parse(json);
+
+    // DOM to string
+    StringBuffer buffer;
+    Writer<StringBuffer> writer(buffer);
+
+    mydoc.Accept(writer);
+
+    // Print the output
+    std::cout << buffer.GetString() << std::endl;
+
+    
   }
   break;
 
