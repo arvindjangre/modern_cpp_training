@@ -4,7 +4,7 @@
 std::ostream &CSVparser::print(std::ostream &out) const {
   using namespace csv;
   std::string path = "/home/usinglinux/cpp_arvindjangre/3_week/src/";
-  CSVReader reader(path + "very_big_file.csv");
+  CSVReader reader(path + this->m_filename);
 
   for (CSVRow &row : reader) { // Input iterator
     for (CSVField &field : row) {

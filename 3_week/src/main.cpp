@@ -11,8 +11,13 @@ int getFileType(const std::string &);
 
 int main(int argc, char *argv[]) {
 
-  int fileType = 3;
+  if(argc < 2){
+    std::cout << "Usage: ./parser input_file.csv" << std::endl;
+    exit(0);
+  }
+
   std::string fileName = argv[1];
+  int fileType = getFileType(fileName);
 
   switch (fileType) {
   case 1: {
@@ -44,11 +49,11 @@ int main(int argc, char *argv[]) {
 int getFileType(const std::string &filename) {
   std::string extension = std::filesystem::path(filename).extension();
 
-  if (extension.compare(".csv")) {
+  if (extension.compare(".csv") == 0) {
     return 1;
-  } else if (extension.compare(".xml")) {
+  } else if (extension.compare(".xml") == 0) {
     return 2;
-  } else if (extension.compare(".json")) {
+  } else if (extension.compare(".json") == 0) {
     std::cout << extension << std::endl;
     return 3;
   }

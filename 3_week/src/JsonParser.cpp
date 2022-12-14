@@ -10,8 +10,9 @@
 
 std::ostream &JsonParser::print(std::ostream &out) const {
   using namespace rapidjson;
-  std::ifstream ifs{
-      R"(/home/usinglinux/cpp_arvindjangre/3_week/src/example2.json)"};
+  std::string path = "/home/usinglinux/cpp_arvindjangre/3_week/src/";
+  std::string file = path + this->m_filename;
+  std::ifstream ifs{file};
   if (!ifs.is_open()) {
     std::cerr << "Could not open file for reading!\n";
   }

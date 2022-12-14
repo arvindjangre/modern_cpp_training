@@ -33,8 +33,9 @@ void walk(std::ostream &out, const rapidxml::xml_node<> *node, int indent = 0) {
 }
 
 std::ostream &XMLparser::print(std::ostream &out) const {
-  rapidxml::file<> xmlFile(
-      "/home/usinglinux/cpp_arvindjangre/3_week/src/example1.xml");
+  std::string path = "/home/usinglinux/cpp_arvindjangre/3_week/src/";
+  std::string file = path + this->m_filename;
+  rapidxml::file<> xmlFile(file.c_str());
   rapidxml::xml_document<> doc;
   doc.parse<0>(xmlFile.data());
 
