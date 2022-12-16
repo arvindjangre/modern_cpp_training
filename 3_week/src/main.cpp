@@ -22,14 +22,14 @@ int main(int argc, char *argv[]) {
   switch (fileType) {
   case 1: {
     // csv parser
-    CSVparser c{fileName};
-    IParser &pref{c};
+    CSVparser csv{fileName};
+    IParser &pref{csv};
     std::cout << pref << std::endl;
   } break;
   case 2: {
     // XML parser
-    XMLparser x{fileName};
-    IParser &pref{x};
+    XMLparser xml{fileName};
+    IParser &pref{xml};
     std::cout << pref << std::endl;
   } break;
   case 3: {

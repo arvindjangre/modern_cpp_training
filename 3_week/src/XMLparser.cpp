@@ -2,16 +2,16 @@
 #include <rapidxml/rapidxml_utils.hpp>
 
 void walk(std::ostream &out, const rapidxml::xml_node<> *node, int indent = 0) {
-  const auto ind = std::string(indent * 4, ' ');
-  out << ind.c_str();
+  const auto indentation = std::string(indent * 4, ' ');
+  out << indentation.c_str();
 
-  const rapidxml::node_type t = node->type();
-  switch (t) {
+  const rapidxml::node_type node_type = node->type();
+  switch (node_type) {
   case rapidxml::node_element: {
     out << node->name();
-    for (const rapidxml::xml_attribute<> *a = node->first_attribute(); a;
-         a = a->next_attribute()) {
-      out << "" << a->name() << ": " << a->value() << std::endl;
+    for (const rapidxml::xml_attribute<> *attribute = node->first_attribute(); attribute;
+         attribute = attribute->next_attribute()) {
+      out << "" << attribute->name() << ": " << attribute->value() << std::endl;
     }
 
     for (const rapidxml::xml_node<> *n = node->first_node(); n;
@@ -27,7 +27,7 @@ void walk(std::ostream &out, const rapidxml::xml_node<> *node, int indent = 0) {
     break;
 
   default:
-    out << "NODE-TYPE:" << t << std::endl;
+    out << "NODE-TYPE:" << node_type << std::endl;
     break;
   }
 }

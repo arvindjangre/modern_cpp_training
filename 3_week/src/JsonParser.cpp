@@ -33,4 +33,5 @@ std::ostream &JsonParser::print(std::ostream &out) const {
 
   // Print the output
   out << buffer.GetString() << std::endl;
+  return out;
 }
