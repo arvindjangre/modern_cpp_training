@@ -1,0 +1,9 @@
+Arbitrary Precision Calculator.
+
+Implement an Arbitrary Precision Calculator for whole numbers. (Floating numbers are not necessary)
+
+Requirements:
+Must have the capability to Add, Subtract, Multiply, Divide and Exponentiation(Power of).
+Must have the history of at least 10 calculations.
+Must use Templates and Classes.
+Unit tests should be written for the program.
