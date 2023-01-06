@@ -1,7 +1,7 @@
 #include "../include/XMLparser.h"
 #include <rapidxml/rapidxml_utils.hpp>
 
-void walk(std::ostream &out, const rapidxml::xml_node<> *node, int indent = 0) {
+void readXMLData(std::ostream &out, const rapidxml::xml_node<> *node, int indent = 0) {
   const auto indentation = std::string(indent * 4, ' ');
   out << indentation.c_str();
 
@@ -16,7 +16,7 @@ void walk(std::ostream &out, const rapidxml::xml_node<> *node, int indent = 0) {
 
     for (const rapidxml::xml_node<> *n = node->first_node(); n;
          n = n->next_sibling()) {
-      walk(out, n, indent + 1);
+      readXMLData(out, n, indent + 1);
     }
     out << std::endl;
 
@@ -39,6 +39,6 @@ std::ostream &XMLparser::print(std::ostream &out) const {
   rapidxml::xml_document<> doc;
   doc.parse<0>(xmlFile.data());
 
-  walk(out, doc.first_node());
+  readXMLData(out, doc.first_node());
   return out;
 }
