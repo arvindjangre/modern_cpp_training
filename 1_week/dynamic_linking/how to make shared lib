@@ -1,0 +1,18 @@
+main.cpp <- prog to run
+
+
+
+Now create lib
+--------------
+my_math.cpp <- contains definitions
+g++ -o libmy_math.so -fpic -shared my_math.cpp
+------------------------------
+
+------------------------
+g++ -c main.cpp -o main.o
+g++ -o main main.o -lmy_math -L.    // dot means current dir
+//nm -D main
+
+//echo $LD_LIBRARY_PATH
+
+LD_LIBRARY_PATH=. ./main
