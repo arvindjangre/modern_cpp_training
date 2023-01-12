@@ -1,0 +1,5 @@
+file(GLOB_RECURSE TEST_SOURCES "*.cpp")
+add_executable(calculator_test ${TEST_SOURCES})
+target_link_libraries(calculator_test ${GTEST_LIBRARIES} Threads::Threads)
+add_dependencies(calculator_test calculator)
+gtest_discover_tests(calculator_test)

@@ -1,26 +1,26 @@
 cmake_minimum_required(VERSION 3.10.0)
-project(arbitrary_precision_calc VERSION 0.1.0)
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
+project(calculator VERSION 0.1.0)
 
 include(CTest)
 enable_testing()
 
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-file(GLOB_RECURSE SRC_FILES src/*.cpp )
-add_executable(arbitrary_precision_calc ${SRC_FILES})
+set(CMAKE_BUILD_TYPE Debug)
+set(CMAKE_CXX_FLAGS " -O0 -g3")
 
-set(JSON_BuildTests OFF CACHE INTERNAL "")
+file(GLOB_RECURSE SRC_FILES src/*.cpp)
+add_executable(calculator ${SRC_FILES})
+target_include_directories(calculator PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-#target_link_libraries(arbitrary_precision_calc csv)
+find_package(Threads REQUIRED)
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
 
-target_include_directories(arbitrary_precision_calc PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
-
-include_directories(${CSV_INCLUDE_DIR})
-
-target_link_libraries(${PROJECT_NAME} ${LIBS})
+add_subdirectory(test)
 
 include(CPack)

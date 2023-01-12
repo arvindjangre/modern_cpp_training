@@ -1,16 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <string>
+#include <algorithm>
+#include "calculator.h"
 
 int main() {
-  std::cout << "hello" << std::endl;
-  std::vector<int> v;
-  std::vector<char> c;
-
-  std::cout << v.max_size() << std::endl;
-  // 2 305 843 009 213 693 951
-  std::cout << c.max_size() << std::endl;
-  // 9 223 372 036 854 775 807 number of chars can store.
-  
-  return 0;
+  Calculator cal;
+  std::string input;
+  std::cout << "Please enter the expression: ";
+  std::cin >> input;
+  std::vector<uint8_t> x;
 }
-
