@@ -5,12 +5,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "parser",
+      "name": "calculator",
       "type": "cppdbg",
       "request": "launch",
       "cwd": "${fileDirname}",
       "miDebuggerPath": "gdb",
-      "program": "${workspaceRoot}/build/apc",
+      "program": "${workspaceRoot}/build/calculator",
       "args": [
         "example1.xml"
       ]

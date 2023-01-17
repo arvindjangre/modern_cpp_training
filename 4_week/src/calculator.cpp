@@ -1,4 +1,2 @@
-#include "../include/calculator.h"
-
-
+#include "calculator.h"
 
