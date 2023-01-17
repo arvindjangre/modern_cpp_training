@@ -1,6 +1,6 @@
 #ifndef CALCULATOR_H
 #define CALCULATOR_H
-
+#include "helper_functions.h"
 #include <algorithm>
 #include <iostream>
 #include <string>
@@ -29,17 +29,10 @@ public:
       return result;
     }
 
-    std::string first_number = input.substr(0, operator_index);
-    std::string second_number = input.substr(operator_index + 1);
-    std::vector<T> num1, num2;
 
-    for(int i = 0; i < first_number.length(); ++i) {
-      num1.push_back(first_number[i] - '0');
-    }
-
-    for(int i = 0; i < second_number.length(); ++i) {
-      num2.push_back(second_number[i] - '0');
-    }
+    std::pair<std::vector<T>, std::vector<T>> nums = extractNumberFromInput<T>(input, operator_index);
+    std::vector<T> num1 = nums.first;
+    std::vector<T> num2 = nums.second;
 
     switch (input[operator_index])
     {
@@ -59,7 +52,6 @@ public:
     }
 
     return result;
-
   }
 
   std::vector<T> add(std::vector<T> num1, std::vector<T> num2) {
