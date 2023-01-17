@@ -5,9 +5,19 @@
 #include "calculator.h"
 
 int main() {
-  Calculator cal;
-  std::string input;
-  std::cout << "Please enter the expression: ";
-  std::cin >> input;
-  std::vector<uint8_t> x;
+    Calculator<uint8_t> calculator;
+    std::string input;
+    while (true) {
+        std::cout << "Enter an arithmetic expression: ";
+        std::getline(std::cin, input);
+        if (input == "q") {
+            break;
+        }
+        if(input == "h") {
+            calculator.showHistory();
+        } else {
+            std::cout << "Result: " << calculator.calculate(input) << std::endl;
+        }
+    }
+    return 0;
 }
