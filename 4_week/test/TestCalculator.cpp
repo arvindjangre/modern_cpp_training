@@ -64,46 +64,20 @@ TEST(CalculatorTest, TestSubtraction) {
   ASSERT_EQ(calculator.calculate(input), expected_output);
 }
 
-/*
 
 TEST(CalculatorTest, TestMultiplication) {
   Calculator<uint8_t> calculator;
   std::string input = "98765432109876543210*12345678901234567890";
-  std::string expected_output = "121932631137021795260066350710945619840780";
+  std::string expected_output = "1219326311370217952237463801111263526900";
   ASSERT_EQ(calculator.calculate(input), expected_output);
-}
 
-TEST(CalculatorTest, TestDivision) {
-  Calculator<uint8_t> calculator;
-  std::string input = "98765432109876543210/12345678901234567890";
-  std::string expected_output = "8";
+  input = "8*86";
+  expected_output = "688";
   ASSERT_EQ(calculator.calculate(input), expected_output);
-}
 
-TEST(CalculatorTest, TestModulus) {
-  Calculator<uint8_t> calculator;
-  std::string input = "98765432109876543210%12345678901234567890";
-  std::string expected_output = "86419753208641975320";
+  input = "8*8";
+  expected_output = "64";
   ASSERT_EQ(calculator.calculate(input), expected_output);
-}
-
-
-TEST(CalculatorTest, TestDivide) {
-    Calculator<uint8_t> calculator;
-    std::vector<uint8_t> a = {1, 0, 0, 0, 0};
-    std::vector<uint8_t> b = {2, 5};
-    std::vector<uint8_t> expected_result = {4, 0};
-    ASSERT_EQ(calculator.divide(a, b).first, expected_result);
-
-    a = {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9};
-    b = {9};
-    expected_result = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    ASSERT_EQ(calculator.divide(a, b).first, expected_result);
-
-    a = {5, 0, 0, 0, 0, 0, 0};
-    b = {1, 0, 0};
-    expected_result = {5};
-    ASSERT_EQ(calculator.divide(a, b).first, expected_result);
 }
 
 TEST(CalculatorTest, TestMultiply) {
@@ -123,5 +97,3 @@ TEST(CalculatorTest, TestMultiply) {
     expected_result = {1, 0, 0, 0, 0, 0, 0};
     ASSERT_EQ(calculator.multiply(a, b), expected_result);
 }
-
-*/

@@ -3,9 +3,9 @@
 #include "helper_functions.h"
 #include <algorithm>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
-#include <sstream>
 template <typename T> class Calculator {
 private:
   std::vector<std::string> history;
@@ -48,10 +48,20 @@ public:
     case '-': {
       std::vector<T> ans;
       ans = subtract(num1, num2);
-      if(ans[0] < 0) {
+      if (ans[0] < 0) {
         result += '-';
         ans[0] = -ans[0];
       }
+      for (int i = 0; i < ans.size(); ++i) {
+        result += (char)(ans[i] + '0');
+      }
+    }
+
+    break;
+
+    case '*': {
+      std::vector<T> ans;
+      ans = multiply(num1, num2);
       for (int i = 0; i < ans.size(); ++i) {
         result += (char)(ans[i] + '0');
       }
@@ -90,14 +100,14 @@ public:
 
   std::vector<T> subtract(std::vector<T> &num1, std::vector<T> &num2) {
     std::vector<T> result;
-    int i = num1.size() -1, j = num2.size() - 1, carry = 0;
+    int i = num1.size() - 1, j = num2.size() - 1, carry = 0;
 
-    while( i >= 0 || j >= 0) {
+    while (i >= 0 || j >= 0) {
       int a = i < 0 ? 0 : num1[i--];
       int b = j < 0 ? 0 : num2[j--];
       int sum = a - b + carry;
 
-      if(sum < 0) {
+      if (sum < 0) {
         carry = -1;
         sum += 10;
       } else {
@@ -106,7 +116,7 @@ public:
       result.push_back(sum);
     }
 
-    if( carry < 0) {
+    if (carry < 0) {
       std::vector<T> temp = subtract(num2, num1);
       temp[0] *= -1;
       return temp;
@@ -114,6 +124,24 @@ public:
 
     std::reverse(result.begin(), result.end());
     addToHistory(num1, num2, result, "-");
+    return result;
+  }
+
+  std::vector<T> multiply(std::vector<T> num1, std::vector<T> num2) {
+    std::vector<T> result(num1.size() + num2.size(), 0);
+    std::reverse(num1.begin(), num1.end());
+    std::reverse(num2.begin(), num2.end());
+    for (int i = 0; i < num1.size(); i++) {
+      for (int j = 0; j < num2.size(); j++) {
+        result[i + j] += num1[i] * num2[j];
+        result[i + j + 1] += result[i + j] / 10; //carry
+        result[i + j] %= 10;
+      }
+    }
+    while (result.size() > 1 && result.back() == 0) {
+      result.pop_back();
+    }
+    std::reverse(result.begin(), result.end());
     return result;
   }
 
@@ -135,8 +163,8 @@ public:
       result_str += std::to_string(i);
     }
 
-    history.push_back("(" + operation + ") ----> " + num1_str + " + " + num2_str + " = " +
-                      result_str);
+    history.push_back("(" + operation + ") ----> " + num1_str + " + " +
+                      num2_str + " = " + result_str);
   }
 
   void showHistory() {
@@ -144,8 +172,8 @@ public:
       std::cout << str << std::endl;
     }
   }
-    std::vector<T> removeLeadingZeroes(std::vector<T> &vec) {
-    while(vec.front() == 0 && vec.size() > 1) {
+  std::vector<T> removeLeadingZeroes(std::vector<T> &vec) {
+    while (vec.front() == 0 && vec.size() > 1) {
       vec.erase(vec.begin());
     }
     return vec;
