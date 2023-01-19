@@ -122,3 +122,14 @@ TEST(CalculatorTest, TestDivide2) {
     expected_result = "50000";
     ASSERT_EQ(calculator.divide(a, b), expected_result);
 }
+TEST(CalculatorTest, TestPower) {
+  Calculator<uint8_t> calculator;
+  std::string input = "5^2";
+  std::string expected_output = "25";
+  ASSERT_EQ(calculator.calculate(input), expected_output);
+
+  input = "55555^2";
+  expected_output = "3086358025";
+  ASSERT_EQ(calculator.calculate(input), expected_output);
+
+}

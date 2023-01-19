@@ -55,8 +55,7 @@ public:
       for (int i = 0; i < ans.size(); ++i) {
         result += (char)(ans[i] + '0');
       }
-    }
-    break;
+    } break;
 
     case '*': {
       std::vector<T> ans;
@@ -65,6 +64,15 @@ public:
         result += (char)(ans[i] + '0');
       }
     } break;
+
+    case '^': {
+      std::vector<T> ans;
+      ans = power(num1, num2);
+      for (int i = 0; i < ans.size(); ++i) {
+        result += (char)(ans[i] + '0');
+      }
+    } break;
+
     case '/': {
       std::vector<T> ans;
       result = divide(num1, num2);
@@ -135,7 +143,7 @@ public:
     for (int i = 0; i < num1.size(); i++) {
       for (int j = 0; j < num2.size(); j++) {
         result[i + j] += num1[i] * num2[j];
-        result[i + j + 1] += result[i + j] / 10; //carry
+        result[i + j + 1] += result[i + j] / 10; // carry
         result[i + j] %= 10;
       }
     }
@@ -147,18 +155,32 @@ public:
   }
 
   std::string divide(std::vector<T> num1_vec, std::vector<T> num2_vec) {
-      long long int num1 = 0;
-      for (int i = 0; i < num1_vec.size(); i++) {
-          num1 = num1 * 10 + num1_vec[i];
-      }
-      long long int num2 = 0;
-      for (int i = 0; i < num2_vec.size(); i++) {
-          num2 = num2 * 10 + num2_vec[i];
-      }
+    long long int num1 = 0;
+    for (int i = 0; i < num1_vec.size(); i++) {
+      num1 = num1 * 10 + num1_vec[i];
+    }
+    long long int num2 = 0;
+    for (int i = 0; i < num2_vec.size(); i++) {
+      num2 = num2 * 10 + num2_vec[i];
+    }
 
-      long long int res = num1/num2;
-      return std::to_string(res);
+    long long int res = num1 / num2;
+    return std::to_string(res);
   }
+
+std::vector<T> power(std::vector<T> a, std::vector<T> b) {
+    std::vector<T> result {1};
+    std::vector<T> base = a;
+    for(int i=b.size()-1;i>=0;i--){
+        for(int j=0;j<8;j++){
+            if(b[i]&(1<<j))
+                result = multiply(result, base);
+            base = multiply(base,base);
+        }
+    }
+    return result;
+}
+
 
   void addToHistory(std::string input, std::string result) {
     // history contains last 10 calculations.
@@ -179,23 +201,6 @@ public:
     }
     return vec;
   }
-
-int compare(std::vector<T> num1, std::vector<T> num2) {
-    // Remove leading zeroes from the input vectors
-    while (num1.size() > 1 && num1.back() == 0) num1.pop_back();
-    while (num2.size() > 1 && num2.back() == 0) num2.pop_back();
-    // Compare the sizes of the input vectors
-    if (num1.size() > num2.size()) return 1;
-    if (num1.size() < num2.size()) return -1;
-    // Compare the digits of the input vectors
-    for (int i = num1.size() - 1; i >= 0; i--) {
-        if (num1[i] > num2[i]) return 1;
-        if (num1[i] < num2[i]) return -1;
-    }
-    // If the input vectors are equal, return 0
-    return 0;
-}
-
 
 };
 
