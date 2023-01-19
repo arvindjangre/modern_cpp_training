@@ -97,3 +97,28 @@ TEST(CalculatorTest, TestMultiply) {
     expected_result = {1, 0, 0, 0, 0, 0, 0};
     ASSERT_EQ(calculator.multiply(a, b), expected_result);
 }
+
+TEST(CalculatorTest, TestDivision1) {
+  Calculator<uint8_t> calculator;
+  std::string input = "98109876543210/1234567890";
+  std::string expected_output = "79469";
+  ASSERT_EQ(calculator.calculate(input), expected_output);
+}
+
+TEST(CalculatorTest, TestDivide2) {
+    Calculator<uint8_t> calculator;
+    std::vector<uint8_t> a = {1, 0, 0, 0, 0};
+    std::vector<uint8_t> b = {2, 5};
+    std::string expected_result = "400";
+    ASSERT_EQ(calculator.divide(a, b), expected_result);
+
+    a = {9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9};
+    b = {9};
+    expected_result = "11111111111";
+    ASSERT_EQ(calculator.divide(a, b), expected_result);
+
+    a = {5, 0, 0, 0, 0, 0, 0};
+    b = {1, 0, 0};
+    expected_result = "50000";
+    ASSERT_EQ(calculator.divide(a, b), expected_result);
+}
