@@ -94,7 +94,6 @@ public:
       result.push_back(carry);
     }
     std::reverse(result.begin(), result.end());
-    addToHistory(num1, num2, result, "+");
     return result;
   }
 
@@ -123,7 +122,6 @@ public:
     }
 
     std::reverse(result.begin(), result.end());
-    addToHistory(num1, num2, result, "-");
     return result;
   }
 
@@ -145,26 +143,12 @@ public:
     return result;
   }
 
-  void addToHistory(std::vector<T> num1, std::vector<T> num2,
-                    std::vector<T> result, std::string operation) {
+  void addToHistory(std::string input, std::string result) {
     // history contains last 10 calculations.
     if (history.size() == 10) {
       history.erase(history.begin());
     }
-
-    std::string num1_str, num2_str, result_str;
-    for (auto &i : num1) {
-      num1_str += std::to_string(i);
-    }
-    for (auto &i : num2) {
-      num2_str += std::to_string(i);
-    }
-    for (auto &i : result) {
-      result_str += std::to_string(i);
-    }
-
-    history.push_back("(" + operation + ") ----> " + num1_str + " + " +
-                      num2_str + " = " + result_str);
+    history.push_back(input + " = " + result);
   }
 
   void showHistory() {

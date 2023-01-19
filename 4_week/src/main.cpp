@@ -22,7 +22,9 @@ int main() {
         if(input == "h") {
             calculator.showHistory();
         } else {
-            std::cout << "Result: " << calculator.calculate(input) << std::endl;
+            std::string result = calculator.calculate(input);
+            std::cout << "Result: " << result << std::endl;
+            calculator.addToHistory(input, result);
         }
     }
     return 0;
