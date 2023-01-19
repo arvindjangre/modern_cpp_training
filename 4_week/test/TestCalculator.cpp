@@ -34,20 +34,37 @@ TEST(CalculatorTest, addTestReadsNumbersFromStringInput) {
   ASSERT_EQ(result, expected_result);
 }
 
-/*
 TEST(CalculatorTest, TestAddition) {
   Calculator<uint8_t> calculator;
   std::string input = "12345678901234567890+98765432109876543210";
-  std::string expected_output = "111111111111111111110";
+  std::string expected_output = "111111111011111111100";
   ASSERT_EQ(calculator.calculate(input), expected_output);
 }
 
 TEST(CalculatorTest, TestSubtraction) {
-  Calculator<uint8_t> calculator;
+  Calculator<int8_t> calculator;
   std::string input = "98765432109876543210-12345678901234567890";
   std::string expected_output = "86419753208641975320";
   ASSERT_EQ(calculator.calculate(input), expected_output);
+
+  input = "1-12345678912341234123401234567890";
+  expected_output = "-12345678912341234123401234567889";
+  ASSERT_EQ(calculator.calculate(input), expected_output);
+
+  input = "9213498762340-12345678912341234123401234567890";
+  expected_output = "-12345678912341234114187735805550";
+  ASSERT_EQ(calculator.calculate(input), expected_output);
+
+  input = "9876543210987654321022-1234567890123456789012132";
+  expected_output = "-1224691346912469134691110";
+  ASSERT_EQ(calculator.calculate(input), expected_output);
+
+  input = "2345123412341234123-12345671234123412348901234567890";
+  expected_output = "-12345671234121067225488893333767";
+  ASSERT_EQ(calculator.calculate(input), expected_output);
 }
+
+/*
 
 TEST(CalculatorTest, TestMultiplication) {
   Calculator<uint8_t> calculator;

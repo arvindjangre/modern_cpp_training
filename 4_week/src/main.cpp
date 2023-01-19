@@ -10,7 +10,7 @@ void printUsage() {
 }
 
 int main() {
-    Calculator<uint8_t> calculator;
+    Calculator<int8_t> calculator;
     std::string input;
     printUsage();
     while (true) {
