@@ -168,15 +168,15 @@ public:
     return std::to_string(res);
   }
 
-std::vector<T> power(std::vector<T> a, std::vector<T> b) {
+std::vector<T> power(std::vector<T> num1_vec, std::vector<T> num2_vec) {
     std::vector<T> result {1};
-    std::vector<T> base = a;
-    for(int i=b.size()-1;i>=0;i--){
-        for(int j=0;j<8;j++){
-            if(b[i]&(1<<j))
-                result = multiply(result, base);
-            base = multiply(base,base);
-        }
+    long long int num2 = 0;
+    for (int i = 0; i < num2_vec.size(); i++) {
+      num2 = num2 * 10 + num2_vec[i];
+    }
+    while(num2) {
+      result = multiply(result, num1_vec);
+      num2--;
     }
     return result;
 }
