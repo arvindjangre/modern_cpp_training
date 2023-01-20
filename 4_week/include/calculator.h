@@ -74,8 +74,17 @@ public:
     } break;
 
     case '/': {
-      std::vector<T> ans;
-      result = divide(num1, num2);
+      std::pair<std::vector<T>, std::vector<T>> ans;
+      ans = divide(num1, num2);
+      std::vector<T> quotient = ans.first;
+      std::vector<T> remainder = ans.second;
+      for (int i = 0; i < quotient.size(); ++i) {
+        result += (char)(quotient[i] + '0');
+      }
+      result += "    ";
+      for (int i = 0; i < remainder.size(); ++i) {
+        result += (char)(remainder[i] + '0');
+      }
     } break;
 
     default:
@@ -154,18 +163,49 @@ public:
     return result;
   }
 
-  std::string divide(std::vector<T> num1_vec, std::vector<T> num2_vec) {
-    long long int num1 = 0;
-    for (int i = 0; i < num1_vec.size(); i++) {
-      num1 = num1 * 10 + num1_vec[i];
-    }
-    long long int num2 = 0;
-    for (int i = 0; i < num2_vec.size(); i++) {
-      num2 = num2 * 10 + num2_vec[i];
+  std::pair<std::vector<T>, std::vector<T>> divide(std::vector<T> num1, std::vector<T> num2) {
+    std::vector<T> quotient;
+    std::vector<T> remainder;
+    
+    if(num2.size() == 1 && num2[0] == 0) {
+      std::cout << "Error: Division by zero." << std::endl;
+      return std::make_pair(quotient, remainder);
     }
 
-    long long int res = num1 / num2;
-    return std::to_string(res);
+    if(num1.size() < num2.size()) {
+      quotient.push_back(0);
+      remainder = num1;
+      return std::make_pair(quotient, remainder);
+    }
+
+    int num1_len = num1.size();
+    int num2_len = num2.size();
+
+    std::vector<T> num_to_divide;
+    for(int i = 0; i < num2_len; i++) {
+      num_to_divide.push_back(num1[i]);
+    }
+
+    int quotient_digit = 0;
+
+    for(int i = 0; i <= num1_len - num2_len; i++) {
+      quotient_digit = 0;
+
+      while(compare_vec(num_to_divide, num2)) {
+        num_to_divide = subtract(num_to_divide, num2);
+        quotient_digit++;
+      }
+      quotient.push_back(quotient_digit);
+      
+      if(i + num2_len < num1_len) {
+        num_to_divide.push_back(num1[i + num2_len ]);
+      }
+    }
+
+    remainder = num_to_divide;
+    removeLeadingZeroes(quotient);
+    removeLeadingZeroes(remainder);
+    return std::make_pair(quotient, remainder);
   }
 
 std::vector<T> power(std::vector<T> num1_vec, std::vector<T> num2_vec) {
@@ -201,7 +241,19 @@ std::vector<T> power(std::vector<T> num1_vec, std::vector<T> num2_vec) {
     }
     return vec;
   }
+  
+  bool compare_vec(std::vector<T> num1_vec, std::vector<T> num2_vec) {
+    long long int num1 = 0;
+    for (int i = 0; i < num1_vec.size(); i++) {
+      num1 = num1 * 10 + num1_vec[i];
+    }
+    long long int num2 = 0;
+    for (int i = 0; i < num2_vec.size(); i++) {
+      num2 = num2 * 10 + num2_vec[i];
+    }
 
+    return num1 >= num2 ? 1 : 0;
+  }
 };
 
 #endif
