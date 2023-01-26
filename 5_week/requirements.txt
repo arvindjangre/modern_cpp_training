@@ -15,7 +15,8 @@ Features need to be provided:
 
 Learning Plan (Week 5)
 STL Containers
-- Maps: Understand the difference between with ordered map and unordered map. How to decide which one to use?
+- Maps: Understand the difference between with ordered map and unordered map. 
+        How to decide which one to use?
   Given two arrays, find the common elements in them using map
   Example 1:
   Input: nums1 = [1,2,2,1], nums2 = [2,2]
@@ -25,10 +26,14 @@ STL Containers
   Input: nums1 = [4,9,5], nums2 = [9,4,9,8,4]
   Output: [4,9]
 
-- Set: Differences between Maps and Set and when to use which data structure. Implement different operations on a set.
+- Set: Differences between Maps and Set and when to use which data structure.
+       Implement different operations on a set.
 - Deque: Understand the concept of deque. Implement stack and queue using deque.
 STL ContainersURL
 MapsURL
 SetURL
 DequeURL
 Music PlaylistAssignment
+
+
+Click https://www.learncpp.com/cpp-tutorial/stl-containers-overview/ link to open resource.
