@@ -4,14 +4,22 @@
 #include <vector>
 #include <list>
 #include <string>
+#include <iostream>
 class PlayList
 {
 private:
-  std::list<Song> play_list;
-  
+  std::vector<Song> play_list;
+  int current_song_index;
 public:
-  Song getSong();
-  void addSong(std::string);
+  void addSong(Song);
+  void Play();
+  void Pause();
+  void Next();
+  void Previous();
+  void MoveUp(int index);
+  void MoveDown(int index);
+  void ListSongs();
+
 };
 
 

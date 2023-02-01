@@ -6,11 +6,9 @@ class Song
 private:
   std::string name;
 public:
+  Song(std::string name) : name(name) {}
   std::string getSong() {
     return name;
-  }
-  void setSong(std::string name) {
-    this->name = name;
   }
 };
 

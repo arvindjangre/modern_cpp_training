@@ -11,6 +11,8 @@ private:
 public:
   void CreatePlaylist();
   PlayList GetPlayList();
+  void LoadPlayLists();
+  void SavePlayLists();
 };
 
 #endif
