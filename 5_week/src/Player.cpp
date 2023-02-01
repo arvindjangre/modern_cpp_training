@@ -40,3 +40,6 @@
   void Player::ListSongsInPlaylist(std::string playlist_name) {
     playlists[playlist_name].ListSongs();
   }
+  int Player::getCount() {
+  return playlists.size();
+}

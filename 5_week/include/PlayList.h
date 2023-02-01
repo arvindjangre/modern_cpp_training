@@ -8,8 +8,8 @@
 class PlayList
 {
 private:
-  std::vector<Song> play_list;
   int current_song_index;
+  std::vector<Song> play_list;
 public:
   void addSong(Song);
   void Play();

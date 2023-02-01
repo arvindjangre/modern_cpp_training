@@ -5,10 +5,10 @@ void PlayList::addSong(Song song) { this->play_list.push_back(song); }
 void PlayList::Play() {
   if (play_list.size() == 0) {
     std::cout << "Playlist is empty." << std::endl;
-    return;
+  } else {
+    std::cout << "Playing: " << play_list[current_song_index].getSong()
+              << std::endl;
   }
-  std::cout << "Playing: " << play_list[current_song_index].getSong()
-            << std::endl;
 }
 void PlayList::Pause() {
   std::cout << "Paused: " << play_list[current_song_index].getSong()

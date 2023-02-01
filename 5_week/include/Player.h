@@ -4,9 +4,9 @@
 #include <map>
 class Player {
 private:
-  std::map<std::string, PlayList> playlists;
 
 public:
+  std::map<std::string, PlayList> playlists;
   void CreatePlaylist(std::string playlist_name);
 
   void AddSongToPlaylist(std::string playlist_name, Song song);
@@ -19,5 +19,6 @@ public:
 
   void ListPlaylist();
   void ListSongsInPlaylist(std::string playlist_name);
+  int getCount();
 };
 #endif
