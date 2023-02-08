@@ -1,0 +1,23 @@
+Week 7 Assignment - Group Chat Application Assignment
+Create a group chat console application. Also add a feature like WhatsApp 
+to notify the user whenever his/her message is delivered and read by any 
+of the group members.
+
+Reading of week 6:
+Learning Plan (Week 6-7)
+File Handling 
+Read and write file handling, use file to store the data and read the data 
+understand open, close, read, write, seek. 
+Socket Programming 
+ Understand client server architecture. 
+ create a server and client assignment where server will be listening to a specific port, server will be multithreaded and at same time multiple client should be able to send messages to server
+Multithreading, mutex, semaphores using pthread. 
+Use std::thread to write multithreading programing, Understand concept of join, detach etc. 
+Understand mutex, write a sample program to protect shared data across multiple threads 
+create a dead lock program and use best method to resolve it. 
+Pthread manualURL
+Pthread functionsURL
+File Handling referenceURL
+Socket Programming referenceURL
+Week 6 Assignment - Parser
+Week 7 Assignment - Group Chat Application Assignment
