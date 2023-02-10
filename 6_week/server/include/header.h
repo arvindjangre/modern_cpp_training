@@ -47,3 +47,10 @@ const int BACKLOG = 10;
 const int MAX_MESSAGE_LENGTH = 1024;
 const int NOTIFICATION_DELAY = 500;
 
+
+#include<fstream>
+#include <rapidjson/document.h>
+#include <rapidjson/istreamwrapper.h>
+#include <rapidjson/ostreamwrapper.h>
+#include <rapidjson/stringbuffer.h>
+#include <rapidjson/writer.h>

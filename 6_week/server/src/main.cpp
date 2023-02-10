@@ -20,15 +20,16 @@ NetworkUtils server;
 
 struct sockaddr_in serverAddress;
 
-void processConnection();
-void processRequest(std::pair<int, std::string>);
-void showOptions() {
-  std::cout << "1. enter number" << std::endl;
-  std::cout << "2. enter group no" << std::endl;
-  std::cout << "3. create group" << std::endl;
+void signalHandlerForSIGINT(int signal) {
+  std::cout << "SIGINT signal received. Cleaning up resources." << std::endl;
+  // Perform any necessary cleanup tasks here.
+  exit(0);
 }
 
 int main(int argc, char *argv[]) {
+  // Register the signal handler for SIGINT
+  signal(SIGINT, signalHandlerForSIGINT);
+  
   int server_socket = socket(AF_INET, SOCK_STREAM, 0);
   if (server_socket < 0) {
     std::cerr << "Error: Could not create socket." << std::endl;

@@ -116,3 +116,81 @@ void handle_client(int client, int id) {
   cv.notify_all();
   close(client);
 }
+
+void loadDataFromFile() {
+  using namespace rapidjson;
+
+  std::ifstream jsonFile("data.json");
+  std::string jsonData((std::istreambuf_iterator<char>(jsonFile)), std::istreambuf_iterator<char>());
+  jsonFile.close();
+
+  // parse json data
+  Document document;
+  document.Parse(jsonData.c_str());
+
+  // read clients
+  const Value& clientsArray = document["clients"];
+  for(SizeType i = 0; i < clientsArray.Size(); i++) {
+    int id = clientsArray[i]["id"].GetInt();
+    std::string name = clientsArray[i]["name"].GetString();
+    clients[id] = name;
+  }
+
+  // read groups
+
+  const Value& groupsArray = document["groups"];
+  for(SizeType i = 0; i < groupsArray.Size(); i++) {
+    std::string name = groupsArray[i]["name"].GetString();
+    std::vector<int> clientIds;
+    const Value& groupClientsArray = groupsArray[i]["clients"];
+    for(SizeType j = 0; j < groupClientsArray.Size(); j++) {
+      int clientId = groupClientsArray[j].GetInt();
+      clientIds.push_back(clientId);
+    }
+    groups[name] = clientIds;
+  }
+}
+
+void writeDataToFile() {
+  using namespace rapidjson;
+  StringBuffer sb;
+  Writer<StringBuffer> writer(sb);
+
+  writer.StartObject();
+
+  // write clients
+
+  writer.Key("clients");
+  writer.StartArray();
+  for (const auto& [id, name] : clients) {
+    writer.StartObject();
+    writer.Key("id");
+    writer.Int(id);
+    writer.Key("name");
+    writer.String(name.c_str(), name.length());
+    writer.EndObject();
+  }
+  writer.EndArray();
+
+  // write groups
+  writer.Key("groups");
+  writer.StartArray();
+  for (const auto& [name, clientIds] : groups) {
+    writer.StartObject();
+    writer.Key("name");
+    writer.String(name.c_str(), name.length());
+    writer.Key("clients");
+    writer.StartArray();
+    for (const auto& clientId: clientIds) {
+      writer.Int(clientId);
+    }
+    writer.EndArray();
+    writer.EndObject();
+  }
+  writer.EndArray();
+  writer.EndObject();
+
+  std::ofstream outputFile("data.json");
+  outputFile << sb.GetString();
+  outputFile.close();
+}
