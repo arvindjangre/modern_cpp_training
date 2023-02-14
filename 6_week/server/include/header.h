@@ -7,6 +7,8 @@
 #include <unordered_map>
 #include <tuple>
 #include <list>
+#include <algorithm>
+#include <map>
 
 #include <unistd.h>
 #include <stdio.h>
