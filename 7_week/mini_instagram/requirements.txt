@@ -1,0 +1,8 @@
+This involves creating an Instagram kind of application on command line with below requirements:
+
+
+Implement sign up, sign in and sign out functionality. You can use plain text or binary file to store the information.
+Manage each users profile details in file.
+A user can post text messages on timeline and you need to store it for the corresponding user.
+Each user can see the posts of every other user. (Basically, no concept of friend, followers as it is initial level).
+User can like other people's post and the owner of that post should be able to see the people who have liked and also the number of likes on post.

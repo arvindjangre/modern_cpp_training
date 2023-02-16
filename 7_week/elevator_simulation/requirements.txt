@@ -1,0 +1,9 @@
+There is a 8 story building with 2 level of basements. The building has 2 lifts sharing same set of buttons(up and down).
+
+Create a elevator simulation system that handles the following scenarios:
+
+Whenever a user presses a button, which lift will go to the user.
+If a user has pressed up button and someone else below to his floor also presses the up button, depending on the floors where lifts currently are, which lift will go to both the user. Will it be same or different? If it is same then create an algorithm in such a way that it takes minimum number of halts to serve both user's request.
+Handle same for down button.
+If the lift is in process then how will you handle the request which is in queue.
+Use multithreading to solve this problem.
