@@ -21,3 +21,8 @@ File Handling referenceURL
 Socket Programming referenceURL
 Week 6 Assignment - Parser
 Week 7 Assignment - Group Chat Application Assignment
+
+
+bind failed: address already in use how to clear that port
+You have a process that is already using that port. netstat -tulpn will enable one to find the process ID of that is using a particular port.
+kill <pid>

@@ -1,12 +1,3 @@
-// #include<iostream>
-
-// #define TICK "\U00002714"
-
-// int main() {
-//   std::cout << TICK << std::endl;
-//   return 0;
-// }
-
 #include "../include/NetworkUtils.h"
 #include "../include/header.h"
 #include "../include/helper_functions.h"
@@ -17,7 +8,9 @@ std::condition_variable cv;
 std::unordered_map<int, std::string> clients;
 std::unordered_map<std::string, std::vector<int>> groups;
 std::unordered_map<int, std::vector<std::pair<int, std::string>>> messages;
-std::unordered_map<int, std::unordered_map<std::string, std::vector<std::string>>> messages_group;
+std::unordered_map<int,
+                   std::unordered_map<std::string, std::vector<std::string>>>
+    messages_group;
 NetworkUtils server;
 
 struct sockaddr_in serverAddress;
@@ -25,14 +18,13 @@ struct sockaddr_in serverAddress;
 void signalHandlerForSIGINT(int signal) {
   std::cout << "SIGINT signal received. Cleaning up resources." << std::endl;
   // Perform any necessary cleanup tasks here.
-  
   exit(0);
 }
 
 int main(int argc, char *argv[]) {
   // Register the signal handler for SIGINT
   signal(SIGINT, signalHandlerForSIGINT);
-  loadDataFromFile();
+  // loadDataFromFile();
   int server_socket = socket(AF_INET, SOCK_STREAM, 0);
   if (server_socket < 0) {
     std::cerr << "Error: Could not create socket." << std::endl;
@@ -55,8 +47,8 @@ int main(int argc, char *argv[]) {
     std::cerr << "Error: Could not listen on socket." << std::endl;
     return 1;
   }
-
   std::cout << "Server is ready." << std::endl;
+
   while (true) {
     int client_socket = accept(server_socket, NULL, NULL);
     std::cout << client_socket << "\n";

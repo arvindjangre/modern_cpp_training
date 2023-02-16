@@ -23,8 +23,6 @@ int main(int argc, char *argv[]) {
   std::string response;
   std::string serverAddress = "";
 
-  // processConncetionSettings(serverAddress);
-
   while (true) {
     protocol.configureClientSocket(serverHostName,
                                    atoi(serverPortNumber.c_str()));

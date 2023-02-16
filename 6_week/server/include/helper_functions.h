@@ -47,17 +47,6 @@ void send_to_group(const std::string &group, const char *message, int length) {
   }
 }
 
-void send_notification(int client, const char *message, int length) {
-  std::this_thread::sleep_for(std::chrono::milliseconds(NOTIFICATION_DELAY));
-  char notification[MAX_MESSAGE_LENGTH];
-  strcpy(notification, "DELIVERED: ");
-  strcat(notification, message);
-  send_to_client(client, notification, strlen(notification));
-  strcpy(notification, "READ: ");
-  strcat(notification, message);
-  send_to_client(client, notification, strlen(notification));
-}
-
 void handle_client(int client, int id) {
   char buffer[MAX_MESSAGE_LENGTH];
 
@@ -70,12 +59,15 @@ void handle_client(int client, int id) {
     std::string message(buffer, length);
     if (message.substr(0, 4) == "@all") {
       broadcast(buffer + 5, length - 5);
+
     } else if (message.substr(0, 1) == "@") {
       std::string group = message.substr(1, message.find(' ') - 1);
       send_to_group(group, buffer + group.length() + 2,
                     length - group.length() - 2);
-      
+
       messages_group[client][group].push_back(message);
+      send_to_client(client, "DELIVERED", 11);
+
     } else if (message.substr(0, 1) == "#") {
       std::string recipient = message.substr(1, message.find(' '));
       std::unique_lock<std::mutex> lock(mtx);
@@ -87,7 +79,7 @@ void handle_client(int client, int id) {
                      length - recipient.length() - 1);
       messages[client].push_back(
           std::make_pair(it->first, buffer + recipient.length() + 1));
-      // t.detach();
+      send_to_client(client, "DELIVERED", 11);
 
     } else if (message == "!list") {
       std::string response = "CLIENTS: ";
@@ -106,6 +98,7 @@ void handle_client(int client, int id) {
       }
       groups[group].push_back(client);
       send_to_client(client, "Success", 9);
+
     } else if (message.substr(0, 1) == "+") {
       std::string name = message.substr(1, message.find(' '));
       std::unique_lock<std::mutex> lock(mtx);
@@ -115,25 +108,25 @@ void handle_client(int client, int id) {
       }
       lock.unlock();
       send_to_client(client, "Success", 9);
-    } else if(message.substr(0, 5) == "!show") {
+
+    } else if (message.substr(0, 5) == "!show") {
       std::string group = message.substr(6, message.find(' '));
       std::unique_lock<std::mutex> lock(mtx);
-      if(groups.count(group) == 0) {
+      if (groups.count(group) == 0) {
         message = "Group:" + group + " does not exist";
         send_to_client(client, message.c_str(), message.length() + 1);
       } else {
         for (const auto &[senderId, groups] : messages_group) {
-          for (const auto&[groupName, messages_] : groups) {
+          for (const auto &[groupName, messages_] : groups) {
             if (groupName == group) {
-              for (const auto &message: messages_) {
+              for (const auto &message : messages_) {
                 send_to_client(client, message.c_str(), message.length() + 1);
               }
-             }
+            }
           }
         }
       }
       lock.unlock();
-
     }
     writeDataToFile();
   }
@@ -169,7 +162,6 @@ void loadDataFromFile() {
   }
 
   // read groups
-
   const Value &groupsArray = document["groups"];
   for (SizeType i = 0; i < groupsArray.Size(); i++) {
     std::string name = groupsArray[i]["name"].GetString();
